@@ -20,9 +20,10 @@ protected:
 
   virtual void setupSceneClock();
   virtual void setupSceneNoria();
-
+  virtual void setupSceneMuneco();
 
   void turnClock();
+  void moveMuneco(bool forward);
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
       
@@ -38,6 +39,9 @@ protected:
   Ogre::SceneNode* knotNode = nullptr;
 
   Ogre::SceneNode* noriaNode = nullptr;
+
+  Ogre::SceneNode* munecoNode = nullptr;
+
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  

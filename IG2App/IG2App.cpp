@@ -17,6 +17,14 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
 	  turnClock();
   }
+  else if (evt.keysym.sym == SDLK_q)
+  {
+	  moveMuneco(true);
+  }
+  else if (evt.keysym.sym == SDLK_e)
+  {
+	  moveMuneco(false);
+  }
   
   return true;
 }
@@ -52,7 +60,9 @@ void IG2App::setup(void)
   addInputListener(mTrayMgr);
 
   addInputListener(this);   
-  setupSceneNoria();
+  // setupSceneNoria();
+  setupSceneMuneco();
+
 }
 
 void IG2App::setupSceneClock(void)
@@ -147,11 +157,29 @@ void IG2App::turnClock()
 	}*/
 
 	//ESCENA DE LA NORIA
-	noriaNode->roll(Ogre::Degree(5));
+	/*noriaNode->roll(Ogre::Degree(5));
 
 	for (int i = 0; i < 12; i++) {
 		noriaNode->getChild("aspa" + std::to_string(i + 1))->getChild("cangilon" + std::to_string(i + 1))->roll(Ogre::Degree(-5));
 		//clockNode->getChild("cubo" + std::to_string(i + 1))->setPosition(radio * Ogre::Math::Cos(2 * Ogre::Math::PI * i / 12), radio * Ogre::Math::Sin(2 * Ogre::Math::PI * i / 12), 0);
+	}*/
+
+	//ESCENA DEL MUNECO
+	munecoNode->getChild("cabeza")->yaw(Ogre::Degree(-5));
+}
+
+void IG2App::moveMuneco(bool forward)
+{
+	int speed = 5;
+	if(forward)
+	{
+		munecoNode->setPosition(munecoNode->getPosition().x + speed, munecoNode->getPosition().y, munecoNode->getPosition().z + speed);
+		munecoNode->getChild("cuerpo")->rotate(Vector3(1, 0, -1), Ogre::Degree(speed));
+	}
+	else
+	{
+		munecoNode->setPosition(munecoNode->getPosition().x - speed, munecoNode->getPosition().y, munecoNode->getPosition().z - speed);
+		munecoNode->getChild("cuerpo")->rotate(Vector3(1, 0, -1), Ogre::Degree(-speed));
 	}
 }
 
@@ -217,6 +245,72 @@ void IG2App::setupSceneNoria(void)
 		cangilon->setPosition(radio * Ogre::Math::Cos(2 * Ogre::Math::PI * i / 12), radio * Ogre::Math::Sin(2 * Ogre::Math::PI * i / 12), 0);
 		cangilon->setScale(1.5, 1.5, 1);
 	}
+
+	mCamMgr = new OgreBites::CameraMan(mCamNode);
+	addInputListener(mCamMgr);
+	mCamMgr->setStyle(OgreBites::CS_ORBIT);
+}
+
+void IG2App::setupSceneMuneco(void)
+{
+	// create the camera
+	Camera* cam = mSM->createCamera("Cam");
+	cam->setNearClipDistance(1);
+	cam->setFarClipDistance(10000);
+	cam->setAutoAspectRatio(true);
+	//cam->setPolygonMode(Ogre::PM_WIREFRAME); 
+
+	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(cam);
+
+	mCamNode->setPosition(0, 0, 1000);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
+
+	// and tell it to render into the main window
+	Viewport* vp = getRenderWindow()->addViewport(cam);
+	//vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+
+	//------------------------------------------------------------------------
+
+	// without light we would just get a black screen 
+
+	Light* luz = mSM->createLight("Luz");
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDiffuseColour(1, 0, 0);
+
+	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	//mLightNode = mCamNode->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
+
+	mLightNode->setDirection(Ogre::Vector3(1, -1, -1));  //vec3.normalise();
+	//lightNode->setPosition(0, 0, 1000);
+
+	munecoNode = mSM->getRootSceneNode()->createChildSceneNode();
+
+	Ogre::SceneNode* cabeza = munecoNode->createChildSceneNode("cabeza");
+	Ogre::Entity* ent1 = mSM->createEntity("sphere.mesh");
+	cabeza->attachObject(ent1);
+	cabeza->setScale(0.5, 0.5, 0.5);
+	cabeza->setPosition(10, 125, 10);
+
+	Ogre::SceneNode* nariz = cabeza->createChildSceneNode("nariz");
+	Ogre::Entity* ent2 = mSM->createEntity("sphere.mesh");
+	nariz->attachObject(ent2);
+	nariz->setScale(0.15, 0.15, 0.15);
+	nariz->setPosition(70, 0, 70);
+
+	Ogre::SceneNode* cuerpo = munecoNode->createChildSceneNode("cuerpo");
+	Ogre::Entity* ent3 = mSM->createEntity("sphere.mesh");
+	cuerpo->attachObject(ent3);
+	cuerpo->setPosition(10, 0, 10);
+
+	Ogre::SceneNode* ombligo = cuerpo->createChildSceneNode("ombligo");
+	Ogre::Entity* ent4 = mSM->createEntity("sphere.mesh");
+	ombligo->attachObject(ent4);
+	ombligo->setScale(0.15, 0.15, 0.15);
+	ombligo->setPosition(70, 0, 70);
+
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
