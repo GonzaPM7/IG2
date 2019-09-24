@@ -1,0 +1,13 @@
+prefix=D:/FDI/IG2_18_19/ogre-master/myOgre/Dependencies
+exec_prefix=D:/FDI/IG2_18_19/ogre-master/myOgre/Dependencies
+libdir=D:/FDI/IG2_18_19/ogre-master/myOgre/Dependencies/lib
+sharedlibdir=D:/FDI/IG2_18_19/ogre-master/myOgre/Dependencies/lib
+includedir=D:/FDI/IG2_18_19/ogre-master/myOgre/Dependencies/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
