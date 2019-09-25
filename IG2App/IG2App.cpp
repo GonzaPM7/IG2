@@ -13,18 +13,18 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
     getRoot()->queueEndRendering();
   }
-  else if (evt.keysym.sym == SDLK_w)
+  /*else if (evt.keysym.sym == SDLK_w)
   {
-	  turnClock();
+	  //turnClock();
   }
   else if (evt.keysym.sym == SDLK_q)
   {
-	  moveMuneco(true);
+	  //moveMuneco(true);
   }
   else if (evt.keysym.sym == SDLK_e)
   {
-	  moveMuneco(false);
-  }
+	  //moveMuneco(false);
+  }*/
   
   return true;
 }
@@ -61,7 +61,66 @@ void IG2App::setup(void)
 
   addInputListener(this);   
   // setupSceneNoria();
-  setupSceneMuneco();
+  setupScene();
+
+}
+
+void IG2App::setupScene()
+{
+	Camera* cam = mSM->createCamera("Cam");
+	cam->setNearClipDistance(1);
+	cam->setFarClipDistance(10000);
+	cam->setAutoAspectRatio(true);
+	//cam->setPolygonMode(Ogre::PM_WIREFRAME); 
+
+	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(cam);
+
+	mCamNode->setPosition(0, 0, 1000);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
+
+	// and tell it to render into the main window
+	Viewport* vp = getRenderWindow()->addViewport(cam);
+	//vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+
+	//------------------------------------------------------------------------
+
+	// without light we would just get a black screen 
+
+	Light* luz = mSM->createLight("Luz");
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDiffuseColour(1, 1, 1);
+
+	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	//mLightNode = mCamNode->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
+
+	mLightNode->setDirection(Ogre::Vector3(1, -1, -1));  //vec3.normalise();
+	//lightNode->setPosition(0, 0, 1000);
+
+	//------------------------------------------------------------------------
+
+	// finally something to render
+
+	//Original 
+	/*Ogre::Entity* ent = mSM->createEntity("cube.mesh");
+	mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
+	mSinbadNode->setPosition(0, 200, 0);
+	mSinbadNode->attachObject(ent);*/
+
+	//Aspa aspa = Aspa(mSM->getRootSceneNode());
+	Noria* noria = new Noria(mSM->getRootSceneNode(), 12);
+	addInputListener(noria);
+
+	mCamMgr = new OgreBites::CameraMan(mCamNode);
+	addInputListener(mCamMgr);
+	mCamMgr->setStyle(OgreBites::CS_ORBIT);
+
+	//mCamMgr->setTarget(mSinbadNode);  
+	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
+
+	//------------------------------------------------------------------------
 
 }
 

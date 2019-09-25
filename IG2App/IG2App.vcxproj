@@ -122,6 +122,7 @@
     <ClInclude Include="Aspa.h" />
     <ClInclude Include="IG2ApplicationContext.h" />
     <ClInclude Include="IG2App.h" />
+    <ClInclude Include="Noria.h" />
     <ClInclude Include="Obj.h" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,7 @@
     <ClCompile Include="IG2ApplicationContext.cpp" />
     <ClCompile Include="IG2Main.cpp" />
     <ClCompile Include="IG2App.cpp" />
+    <ClCompile Include="Noria.cpp" />
     <ClCompile Include="Obj.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

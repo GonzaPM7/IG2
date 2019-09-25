@@ -7,6 +7,9 @@
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
 
+#include "Aspa.h"
+#include "Noria.h"
+
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -18,6 +21,7 @@ protected:
   virtual void setup();
   virtual void shutdown();
 
+  virtual void setupScene();
   virtual void setupSceneClock();
   virtual void setupSceneNoria();
   virtual void setupSceneMuneco();

@@ -20,6 +20,8 @@ class Obj: public OgreBites::InputListener
 		virtual bool mouseMoved(const OgreBites::MouseMotionEvent& evt);
 		virtual bool mouseWheelRolled(const OgreBites::MouseWheelEvent& evt);*/
 
+		Ogre::SceneNode* getNode();
+
 	protected:
 		Ogre::SceneNode* mNode;
 		Ogre::SceneManager* mSM;

@@ -2,7 +2,8 @@
 
 Obj::Obj(Ogre::SceneNode* node)
 {
-	Ogre::SceneManager* mSM = mNode->getCreator();
+	mNode = node;
+	mSM = mNode->getCreator();
 }
 
 Obj::~Obj()
@@ -22,5 +23,10 @@ void Obj::frameRendered(const Ogre::FrameEvent& evt)
 {
 	// evt.timeSinceLastFrame-> en segundos (float/double)
 	// evt.timeSinceLastEvent-> en segundos (float/double)
+}
+
+Ogre::SceneNode* Obj::getNode()
+{
+	return mNode;
 }
 
