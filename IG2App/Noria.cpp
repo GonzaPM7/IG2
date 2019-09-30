@@ -31,7 +31,12 @@ bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_q)
 	{
-		mNode->yaw(Ogre::Degree(5));
+		mNode->roll(Ogre::Degree(5));
+		cilindro->yaw(Ogre::Degree(-5));
+		for (int i = 0; i < numeroAspas; i++)
+		{
+			aspas[i].getNode()->getChildren()[2]->rotate({ 0,0,1 }, Ogre::Degree(-5));
+		}
 	}
 	return true;
 }

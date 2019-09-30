@@ -110,8 +110,19 @@ void IG2App::setupScene()
 	mSinbadNode->attachObject(ent);*/
 
 	//Aspa aspa = Aspa(mSM->getRootSceneNode());
-	Noria* noria = new Noria(mSM->getRootSceneNode(), 12);
+	MeshManager::getSingleton().createPlane("mPlane1080x800",ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+	SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
+	Entity* e = mSM->createEntity("mPlane1080x800");
+	PlanoNode->attachObject(e);
+
+	Noria* noria = new Noria(PlanoNode->createChildSceneNode(), 12);
+	//mSM->getRootSceneNode() con esto no gira
 	addInputListener(noria);
+
+	Muneco* muneco = new Muneco(PlanoNode->createChildSceneNode());
+	muneco->SetPosition(400, 100, 300);
+	muneco->SetRotation(-120);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

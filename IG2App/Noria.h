@@ -11,7 +11,7 @@
 
 class Noria : public OgreBites::InputListener
 {
-private:
+protected:
 	Ogre::SceneNode* mNode;
 	Ogre::SceneManager* mSM;
 
