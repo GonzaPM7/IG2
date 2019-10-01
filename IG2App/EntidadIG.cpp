@@ -30,3 +30,7 @@ bool EntidadIG::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	return false;
 }
+
+void EntidadIG::frameRendered(const Ogre::FrameEvent& evt)
+{
+}

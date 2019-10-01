@@ -20,5 +20,6 @@ protected:
 	Ogre::SceneManager* mSM;
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const Ogre::FrameEvent& evt);
 };
 

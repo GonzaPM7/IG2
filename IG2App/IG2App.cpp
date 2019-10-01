@@ -116,7 +116,9 @@ void IG2App::setupScene()
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);*/
 
-	Plano* plano = new Plano(mSM->getRootSceneNode());
+	padre = mSM->getRootSceneNode()->createChildSceneNode();
+
+	Plano* plano = new Plano(padre);
 	addInputListener(plano);
 
 	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 12);

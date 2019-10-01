@@ -47,6 +47,8 @@ protected:
 
   Ogre::SceneNode* munecoNode = nullptr;
 
+  Ogre::SceneNode* padre = nullptr;
+
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  

@@ -6,15 +6,14 @@ Plano::Plano(Ogre::SceneNode* node): EntidadIG(node)
 		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 	Ogre::SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	Ogre::Entity* e = mSM->createEntity("mPlane1080x800");
-	PlanoNode->attachObject(e);
+	node->attachObject(e);
 }
 
 bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_p)
 	{
-		mNode->rotate({ 0,1,0 }, Ogre::Degree(5));
-		mNode->roll(Ogre::Degree(10));
+		mNode->yaw(Ogre::Degree(5), Ogre::SceneNode::TS_LOCAL);
 	}
 	return true;
 }

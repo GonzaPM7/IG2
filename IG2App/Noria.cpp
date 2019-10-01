@@ -37,3 +37,14 @@ bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 	}
 	return true;
 }
+
+void Noria::frameRendered(const Ogre::FrameEvent& evt)
+{
+	mNode->roll(Ogre::Degree(1));
+
+	cilindro->yaw(Ogre::Degree(-1));
+	for (int i = 0; i < numeroAspas; i++)
+	{
+		aspas[i].getNode()->getChildren()[2]->rotate({ 0,0,1 }, Ogre::Degree(-1));
+	}
+}
