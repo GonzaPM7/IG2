@@ -116,13 +116,13 @@ void IG2App::setupScene()
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);
 
-	Noria* noria = new Noria(PlanoNode->createChildSceneNode(), 12);
+	Noria* noria = new Noria(PlanoNode->createChildSceneNode(), 1);
 	//mSM->getRootSceneNode() con esto no gira
 	addInputListener(noria);
 
 	Muneco* muneco = new Muneco(PlanoNode->createChildSceneNode());
-	muneco->SetPosition(400, 100, 300);
-	muneco->SetRotation(-120);
+	muneco->SetPosition(400, 100, 600);
+	muneco->SetRotation(-190);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
