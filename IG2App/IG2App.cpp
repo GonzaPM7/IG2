@@ -110,17 +110,20 @@ void IG2App::setupScene()
 	mSinbadNode->attachObject(ent);*/
 
 	//Aspa aspa = Aspa(mSM->getRootSceneNode());
-	MeshManager::getSingleton().createPlane("mPlane1080x800",ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	/*MeshManager::getSingleton().createPlane("mPlane1080x800",ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		Plane(Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 	SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	Entity* e = mSM->createEntity("mPlane1080x800");
-	PlanoNode->attachObject(e);
+	PlanoNode->attachObject(e);*/
 
-	Noria* noria = new Noria(PlanoNode->createChildSceneNode(), 1);
+	Plano* plano = new Plano(mSM->getRootSceneNode());
+	addInputListener(plano);
+
+	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 12);
 	//mSM->getRootSceneNode() con esto no gira
 	addInputListener(noria);
 
-	Muneco* muneco = new Muneco(PlanoNode->createChildSceneNode());
+	Muneco* muneco = new Muneco(plano->getNode()->createChildSceneNode());
 	muneco->SetPosition(400, 100, 600);
 	muneco->SetRotation(-190);
 

@@ -7,13 +7,11 @@
 #include <OgreMeshManager.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
+#include "EntidadIG.h"
 
-class Muneco:public OgreBites::InputListener
+class Muneco:public EntidadIG
 {
 protected:
-	Ogre::SceneNode* mNode;
-	Ogre::SceneManager* mSM;
-
 public:
 	Muneco(Ogre::SceneNode* node);
 	void SetPosition(int x, int y, int z);

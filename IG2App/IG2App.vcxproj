@@ -120,20 +120,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Aspa.h" />
+    <ClInclude Include="EntidadIG.h" />
     <ClInclude Include="IG2ApplicationContext.h" />
     <ClInclude Include="IG2App.h" />
     <ClInclude Include="Muñeco.h" />
     <ClInclude Include="Noria.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="Plano.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aspa.cpp" />
+    <ClCompile Include="EntidadIG.cpp" />
     <ClCompile Include="IG2ApplicationContext.cpp" />
     <ClCompile Include="IG2Main.cpp" />
     <ClCompile Include="IG2App.cpp" />
     <ClCompile Include="Muñeco.cpp" />
     <ClCompile Include="Noria.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="Plano.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

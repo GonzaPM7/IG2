@@ -1,10 +1,7 @@
 #include "Aspa.h"
 
-Aspa::Aspa(Ogre::SceneNode* node)
+Aspa::Aspa(Ogre::SceneNode* node): EntidadIG(node)
 {
-	mNode = node;
-	mSM = mNode->getCreator();
-
 	tablonIzquierdo = mNode->createChildSceneNode();
 	Ogre::Entity* ent1 = mSM->createEntity("cube.mesh");
 	tablonIzquierdo->attachObject(ent1);
@@ -22,11 +19,6 @@ Aspa::Aspa(Ogre::SceneNode* node)
 	cangilon->attachObject(ent3);
 	cangilon->setPosition(-1000,0,0);
 	cangilon->setScale(1.5, 1.5, 1.5);
-}
-
-Ogre::SceneNode* Aspa::getNode()
-{
-	return mNode;
 }
 
 void Aspa::rotateBox(int angle)

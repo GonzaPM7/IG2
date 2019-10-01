@@ -1,10 +1,7 @@
 #include "Noria.h"
 
-Noria::Noria(Ogre::SceneNode* node, int nAspas)
+Noria::Noria(Ogre::SceneNode* node, int nAspas): EntidadIG(node)
 {
-	mNode = node;
-	mSM = mNode->getCreator();
-
 	numeroAspas = nAspas;
 
 	int angle = 360 / numeroAspas;

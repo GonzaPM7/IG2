@@ -1,9 +1,7 @@
 #include "Muñeco.h"
 
-Muneco::Muneco(Ogre::SceneNode* node):mNode(node)
+Muneco::Muneco(Ogre::SceneNode* node): EntidadIG(node)
 {
-	mSM = mNode->getCreator();
-
 	Ogre::SceneNode* cuelloNode = mNode->createChildSceneNode();
 
 	Ogre::SceneNode* cabeza = cuelloNode->createChildSceneNode("cabeza");
