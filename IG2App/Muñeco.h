@@ -12,9 +12,18 @@
 class Muneco:public EntidadIG
 {
 protected:
+	bool moving = true;
+	bool forward = true;
+	bool forwardhead = true;
+	int speed = 5;
+	int headspeed = 2;
+	int angle = 0;
 public:
 	Muneco(Ogre::SceneNode* node);
 	void SetPosition(int x, int y, int z);
 	void SetRotation(int angle);
+
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const Ogre::FrameEvent& evt);
 };
 

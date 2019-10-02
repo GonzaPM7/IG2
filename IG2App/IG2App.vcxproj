@@ -139,6 +139,9 @@
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Plano.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\media\IG2App\Practica1.material" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

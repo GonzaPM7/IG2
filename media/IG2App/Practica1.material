@@ -1,0 +1,10 @@
+material Practica1/nariz
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.5 0.5 0.5
+		}
+	}
+}

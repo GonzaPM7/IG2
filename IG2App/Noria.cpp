@@ -26,7 +26,7 @@ Noria::Noria(Ogre::SceneNode* node, int nAspas): EntidadIG(node)
 
 bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_q)
+	/*if (evt.keysym.sym == SDLK_q)
 	{
 		mNode->roll(Ogre::Degree(5));
 		cilindro->yaw(Ogre::Degree(-5));
@@ -34,8 +34,8 @@ bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 		{
 			aspas[i].getNode()->getChildren()[2]->rotate({ 0,0,1 }, Ogre::Degree(-5));
 		}
-	}
-	return true;
+	}*/
+	return false;
 }
 
 void Noria::frameRendered(const Ogre::FrameEvent& evt)
