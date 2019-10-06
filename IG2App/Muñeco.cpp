@@ -6,24 +6,27 @@ Muneco::Muneco(Ogre::SceneNode* node): EntidadIG(node)
 
 	Ogre::SceneNode* cabeza = cuelloNode->createChildSceneNode("cabeza");
 	Ogre::Entity* ent1 = mSM->createEntity("sphere.mesh");
+	ent1->setMaterialName("cuerpo");
 	cabeza->attachObject(ent1);
 	cabeza->setScale(0.5, 0.5, 0.5);
 	cabeza->setPosition(10, 125, 10);
 
 	Ogre::SceneNode* nariz = cabeza->createChildSceneNode("nariz");
 	Ogre::Entity* ent2 = mSM->createEntity("sphere.mesh");
-	ent2->setMaterialName("Practica1/nariz");
+	ent2->setMaterialName("nariz");
 	nariz->attachObject(ent2);
 	nariz->setScale(0.15, 0.15, 0.15);
 	nariz->setPosition(70, 0, 70);
 
 	Ogre::SceneNode* cuerpo = cuelloNode->createChildSceneNode("cuerpo");
 	Ogre::Entity* ent3 = mSM->createEntity("sphere.mesh");
+	ent3->setMaterialName("cuerpo");
 	cuerpo->attachObject(ent3);
 	cuerpo->setPosition(10, 0, 10);
 
 	Ogre::SceneNode* ombligo = cuerpo->createChildSceneNode("ombligo");
 	Ogre::Entity* ent4 = mSM->createEntity("sphere.mesh");
+	ent4->setMaterialName("ombligo");
 	ombligo->attachObject(ent4);
 	ombligo->setScale(0.15, 0.15, 0.15);
 	ombligo->setPosition(70, 0, 70);

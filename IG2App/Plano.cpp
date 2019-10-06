@@ -6,6 +6,7 @@ Plano::Plano(Ogre::SceneNode* node): EntidadIG(node)
 		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 	Ogre::SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	Ogre::Entity* e = mSM->createEntity("mPlane1080x800");
+	e->setMaterialName("water");
 	node->attachObject(e);
 }
 
