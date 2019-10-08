@@ -8,7 +8,7 @@ Noria::Noria(Ogre::SceneNode* node, int nAspas): EntidadIG(node)
 
 	cilindro = mNode->createChildSceneNode("cilindro");
 	Ogre::Entity* ent = mSM->createEntity("Barrel.mesh");
-	ent->setMaterialName("piedra");
+	ent->setMaterialName("cilindro");
 	cilindro->setScale(20,40,20);
 	cilindro->pitch(Ogre::Degree(90));	
 	cilindro->attachObject(ent);

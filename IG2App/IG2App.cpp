@@ -82,7 +82,7 @@ void IG2App::setupScene()
 
 	// and tell it to render into the main window
 	Viewport* vp = getRenderWindow()->addViewport(cam);
-	//vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+	vp->setBackgroundColour(Ogre::ColourValue(0.5, 0.5, 1));
 
 	//------------------------------------------------------------------------
 

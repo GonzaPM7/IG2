@@ -1,3 +1,17 @@
+//Muñeco
+
+material cuerpo {
+    technique {
+        pass{
+            diffuse 0.92 0.75 0.53
+            texture_unit {
+                texture tusk.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
 material nariz {
     technique {
         pass{
@@ -13,6 +27,8 @@ material ombligo {
         }
     }
 }
+
+//Noria
 
 material aspa {
     technique {
@@ -32,7 +48,7 @@ material cangilon {
     }
 }
 
-material piedra {
+material cilindro {
     technique {
         pass{
             texture_unit {
@@ -42,19 +58,9 @@ material piedra {
     }
 }
 
-material cuerpo {
-    technique {
-        pass{
-            diffuse 0.92 0.75 0.53
-            texture_unit {
-                texture tusk.jpg
-                colour_op modulate
-            }
-        }
-    }
-}
 
-material water {
+
+material agua {
     technique {
         pass{
             texture_unit {
