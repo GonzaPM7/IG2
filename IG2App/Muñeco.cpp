@@ -55,9 +55,51 @@ void Muneco::SetRotation(int angle)
 
 bool Muneco::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
+	double x = cos(angle * 3.1416 / 180);
+	double z = -sin(angle * 3.1416 / 180);
 	if (evt.keysym.sym == SDLK_q)
 	{
 		moving = !moving;
+	}
+	else if (evt.keysym.sym == SDLK_UP)
+	{
+		moving = false;
+		mNode->setPosition(mNode->getPosition() + Ogre::Vector3(x, 0, z) * -speed);
+		//mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(-headspeed));
+	}
+	else if (evt.keysym.sym == SDLK_DOWN)
+	{
+		moving = false;
+		mNode->setPosition(mNode->getPosition() + Ogre::Vector3(x, 0, z) * speed);
+		//mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(headspeed));
+	}
+	else if (evt.keysym.sym == SDLK_LEFT)
+	{
+		moving = false;
+		mNode->getChild("cuello")->getChild("cuerpo")->yaw(Ogre::Degree(headspeed), Ogre::SceneNode::TS_WORLD);
+		angle += headspeed;
+	}
+	else if (evt.keysym.sym == SDLK_RIGHT)
+	{
+		moving = false;
+		mNode->getChild("cuello")->getChild("cuerpo")->yaw(Ogre::Degree(-headspeed), Ogre::SceneNode::TS_WORLD);
+		angle -= headspeed;
+	}
+	else if (evt.keysym.sym == SDLK_r)
+	{
+		if (rojo)
+		{
+			/*Ogre::Entity* ent1 = mSM->createEntity("sphere.mesh");
+			ent1->setMaterialName("cuerpo2");
+			mNode->getChild("cuello")->getChild("cuerpo")->attachObject(ent1);
+			
+			mNode->getChild("cuello")->getChild("cabeza")*/
+		}
+		else
+		{
+
+		}
+		rojo = !rojo;
 	}
 	return true;
 }
@@ -69,12 +111,12 @@ void Muneco::frameRendered(const Ogre::FrameEvent& evt)
 		if (forward)
 		{
 			mNode->setPosition(mNode->getPosition().x + speed, mNode->getPosition().y, mNode->getPosition().z);
-			mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(headspeed));
+			mNode->getChild("cuello")->getChild("cuerpo")->roll(Ogre::Degree(3), Ogre::SceneNode::TS_WORLD);//rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(headspeed));
 		}
 		else
 		{
 			mNode->setPosition(mNode->getPosition().x - speed, mNode->getPosition().y, mNode->getPosition().z);
-			mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(-headspeed));
+			mNode->getChild("cuello")->getChild("cuerpo")->roll(Ogre::Degree(-3), Ogre::SceneNode::TS_WORLD);//rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(-headspeed));
 		}
 
 		if (forward && mNode->getPosition().x >= 600)

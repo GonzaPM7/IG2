@@ -16,9 +16,10 @@ protected:
 	int numeroAspas;
 	std::vector<Aspa> aspas;
 	Ogre::SceneNode* cilindro;
+	bool moving = true;
 	
 public:
-	Noria(Ogre::SceneNode* node, int nAspas);
+	Noria(Ogre::SceneNode* node, int nAspas);	
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 };

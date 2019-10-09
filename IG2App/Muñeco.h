@@ -18,6 +18,7 @@ protected:
 	int speed = 5;
 	int headspeed = 2;
 	int angle = 0;
+	bool rojo = false;
 public:
 	Muneco(Ogre::SceneNode* node, bool nouse);
 	void SetPosition(int x, int y, int z);

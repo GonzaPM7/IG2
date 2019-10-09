@@ -25,12 +25,40 @@ material cuerpo2 {
     }
 }
 
+material cuerporojo {
+    technique {
+        pass{        
+			diffuse 1 0 0
+            texture_unit {
+                texture checker.png
+				colour_op modulate
+				env_map spherical
+
+            }
+        }
+    }
+}
+
 material cabeza {
     technique {
         pass{
             texture_unit {
                 texture spotlight_image.png
 				colour_op add
+				env_map spherical
+
+            }
+        }
+    }
+}
+
+material cabezaroja {
+    technique {
+        pass{
+			diffuse 1 0 0
+            texture_unit {
+                texture spotlight_image.png
+				colour_op modulate
 				env_map spherical
 
             }
@@ -92,6 +120,16 @@ material agua {
             texture_unit {
                 texture Water02.jpg
                 scroll_anim -0.1 0.0
+            }
+        }
+    }
+}
+
+material agua2 {
+    technique {
+        pass{
+            texture_unit {
+                texture Water02.jpg
             }
         }
     }

@@ -16,5 +16,22 @@ bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 	{
 		mNode->yaw(Ogre::Degree(5), Ogre::SceneNode::TS_LOCAL);
 	}
+	else if (evt.keysym.sym == SDLK_r)
+	{
+		if (moving)
+		{
+			Ogre::Entity* e = mSM->createEntity("mPlane1080x800");
+			e->setMaterialName("agua2");
+			mNode->attachObject(e);
+		}
+		else
+		{
+			Ogre::Entity* e = mSM->createEntity("mPlane1080x800");
+			e->setMaterialName("agua");
+			mNode->attachObject(e);
+		}
+		moving = !moving;
+		
+	}
 	return true;
 }
