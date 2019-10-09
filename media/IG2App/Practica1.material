@@ -12,6 +12,32 @@ material cuerpo {
     }
 }
 
+material cuerpo2 {
+    technique {
+        pass{
+            texture_unit {
+                texture checker.png
+				colour_op add
+				env_map spherical
+
+            }
+        }
+    }
+}
+
+material cabeza {
+    technique {
+        pass{
+            texture_unit {
+                texture spotlight_image.png
+				colour_op add
+				env_map spherical
+
+            }
+        }
+    }
+}
+
 material nariz {
     technique {
         pass{

@@ -1,26 +1,35 @@
 #include "Muñeco.h"
 
-Muneco::Muneco(Ogre::SceneNode* node): EntidadIG(node)
+Muneco::Muneco(Ogre::SceneNode* node, bool nouse): EntidadIG(node)
 {
 	Ogre::SceneNode* cuelloNode = mNode->createChildSceneNode("cuello");
 
 	Ogre::SceneNode* cabeza = cuelloNode->createChildSceneNode("cabeza");
 	Ogre::Entity* ent1 = mSM->createEntity("sphere.mesh");
-	ent1->setMaterialName("cuerpo");
+	if(nouse)
+		ent1->setMaterialName("cuerpo");
+	else
+		ent1->setMaterialName("cabeza");
+
 	cabeza->attachObject(ent1);
 	cabeza->setScale(0.5, 0.5, 0.5);
 	cabeza->setPosition(10, 125, 10);
 
-	Ogre::SceneNode* nariz = cabeza->createChildSceneNode("nariz");
-	Ogre::Entity* ent2 = mSM->createEntity("sphere.mesh");
-	ent2->setMaterialName("nariz");
-	nariz->attachObject(ent2);
-	nariz->setScale(0.15, 0.15, 0.15);
-	nariz->setPosition(70, 0, 70);
-
+	if (nouse) {
+		Ogre::SceneNode* nariz = cabeza->createChildSceneNode("nariz");
+		Ogre::Entity* ent2 = mSM->createEntity("sphere.mesh");
+		ent2->setMaterialName("nariz");
+		nariz->attachObject(ent2);
+		nariz->setScale(0.15, 0.15, 0.15);
+		nariz->setPosition(70, 0, 70);
+	}
+	
 	Ogre::SceneNode* cuerpo = cuelloNode->createChildSceneNode("cuerpo");
 	Ogre::Entity* ent3 = mSM->createEntity("sphere.mesh");
-	ent3->setMaterialName("cuerpo");
+	if (nouse)
+		ent3->setMaterialName("cuerpo");
+	else
+		ent3->setMaterialName("cuerpo2");
 	cuerpo->attachObject(ent3);
 	cuerpo->setPosition(10, 0, 10);
 

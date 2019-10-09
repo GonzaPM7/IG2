@@ -23,6 +23,7 @@ protected:
   virtual void shutdown();
 
   virtual void setupScene();
+  virtual void setupScene2();
   virtual void setupSceneClock();
   virtual void setupSceneNoria();
   virtual void setupSceneMuneco();

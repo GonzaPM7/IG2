@@ -61,7 +61,7 @@ void IG2App::setup(void)
 
   addInputListener(this);   
   // setupSceneNoria();
-  setupScene();
+  setupScene2();
 
 }
 
@@ -125,7 +125,83 @@ void IG2App::setupScene()
 	//mSM->getRootSceneNode() con esto no gira
 	addInputListener(noria);
 
-	Muneco* muneco = new Muneco(plano->getNode()->createChildSceneNode());
+	Muneco* muneco = new Muneco(plano->getNode()->createChildSceneNode(), true);
+	muneco->SetPosition(400, 100, 600);
+	muneco->SetRotation(-130);
+	addInputListener(muneco);
+
+	mCamMgr = new OgreBites::CameraMan(mCamNode);
+	addInputListener(mCamMgr);
+	mCamMgr->setStyle(OgreBites::CS_ORBIT);
+
+	//mCamMgr->setTarget(mSinbadNode);  
+	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
+
+	//------------------------------------------------------------------------
+
+}
+
+void IG2App::setupScene2()
+{
+	Camera* cam = mSM->createCamera("Cam");
+	cam->setNearClipDistance(1);
+	cam->setFarClipDistance(10000);
+	cam->setAutoAspectRatio(true);
+	//cam->setPolygonMode(Ogre::PM_WIREFRAME); 
+
+	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(cam);
+
+	mCamNode->setPosition(0, 0, 1000);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
+
+	// and tell it to render into the main window
+	Viewport* vp = getRenderWindow()->addViewport(cam);
+	vp->setBackgroundColour(Ogre::ColourValue(0.5, 0.5, 1));
+
+	//------------------------------------------------------------------------
+
+	// without light we would just get a black screen 
+
+	Light* luz = mSM->createLight("Luz");
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDiffuseColour(1, 1, 1);
+
+	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	//mLightNode = mCamNode->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
+
+	mLightNode->setDirection(Ogre::Vector3(1, -1, -1));  //vec3.normalise();
+	//lightNode->setPosition(0, 0, 1000);
+
+	//------------------------------------------------------------------------
+
+	// finally something to render
+
+	//Original 
+	/*Ogre::Entity* ent = mSM->createEntity("cube.mesh");
+	mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
+	mSinbadNode->setPosition(0, 200, 0);
+	mSinbadNode->attachObject(ent);*/
+
+	//Aspa aspa = Aspa(mSM->getRootSceneNode());
+	/*MeshManager::getSingleton().createPlane("mPlane1080x800",ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+	SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
+	Entity* e = mSM->createEntity("mPlane1080x800");
+	PlanoNode->attachObject(e);*/
+
+	padre = mSM->getRootSceneNode()->createChildSceneNode();
+
+	Plano* plano = new Plano(padre);
+	addInputListener(plano);
+
+	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);
+	//mSM->getRootSceneNode() con esto no gira
+	addInputListener(noria);
+
+	Muneco* muneco = new Muneco(plano->getNode()->createChildSceneNode(), false);
 	muneco->SetPosition(400, 100, 600);
 	muneco->SetRotation(-130);
 	addInputListener(muneco);
