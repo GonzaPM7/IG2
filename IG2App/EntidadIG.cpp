@@ -16,6 +16,12 @@ EntidadIG::~EntidadIG()
 	}
 }
 
+void EntidadIG::sendEvent(EntidadIG* entidad)
+{
+	for (EntidadIG* e : appListeners)
+		e->receiveEvent(this);
+}
+
 void EntidadIG::addListener(EntidadIG* entidad)
 {
 	appListeners.push_back(entidad);

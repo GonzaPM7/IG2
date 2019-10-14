@@ -18,7 +18,11 @@ protected:
 	int speed = 5;
 	int headspeed = 2;
 	int angle = 0;
+	int angulo = 0;
 	bool rojo = false;
+
+	Ogre::Entity* cabezaEnt;
+	Ogre::Entity* cuerpoEnt;
 public:
 	Muneco(Ogre::SceneNode* node, bool nouse);
 	void SetPosition(int x, int y, int z);
@@ -26,5 +30,7 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
+
+	virtual void receiveEvent(EntidadIG* entidad);
 };
 

@@ -206,6 +206,10 @@ void IG2App::setupScene2()
 	muneco->SetRotation(-130);
 	addInputListener(muneco);
 
+	plano->addListener(plano);
+	noria->addListener(noria);
+	muneco->addListener(muneco);
+
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
 	mCamMgr->setStyle(OgreBites::CS_ORBIT);

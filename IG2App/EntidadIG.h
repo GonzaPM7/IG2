@@ -12,6 +12,9 @@ public:
 	EntidadIG(Ogre::SceneNode* node);
 	~EntidadIG();
 
+	void sendEvent(EntidadIG* entidad);
+	virtual void receiveEvent(EntidadIG* entidad) {}
+
 	static std::vector<EntidadIG*> appListeners;
 	static void addListener(EntidadIG* entidad);
 	Ogre::SceneNode* getNode();
