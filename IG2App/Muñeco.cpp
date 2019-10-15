@@ -65,13 +65,13 @@ bool Muneco::keyPressed(const OgreBites::KeyboardEvent& evt)
 	{
 		moving = false;
 		mNode->setPosition(mNode->getPosition() + Ogre::Vector3(x, 0, z) * -speed);
-		//mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(-headspeed));
+		mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(-headspeed));
 	}
 	else if (evt.keysym.sym == SDLK_DOWN)
 	{
 		moving = false;
 		mNode->setPosition(mNode->getPosition() + Ogre::Vector3(x, 0, z) * speed);
-		//mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(headspeed));
+		mNode->getChild("cuello")->getChild("cuerpo")->rotate(Ogre::Vector3(-1, 0, 1), Ogre::Degree(headspeed));
 	}
 	else if (evt.keysym.sym == SDLK_LEFT)
 	{

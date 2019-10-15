@@ -115,7 +115,7 @@ void IG2App::setupScene()
 	SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);*/
-
+	
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 
 	Plano* plano = new Plano(padre);
@@ -191,6 +191,8 @@ void IG2App::setupScene2()
 	SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);*/
+
+	//mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20), "space", 1, 1, true, 1.0, 100, 100);
 
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 

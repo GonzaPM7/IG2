@@ -15,6 +15,7 @@ material cuerpo {
 material cuerpo2 {
     technique {
         pass{
+		diffuse 0 0 0
             texture_unit {
                 texture checker.png
 				colour_op add
@@ -42,6 +43,7 @@ material cuerporojo {
 material cabeza {
     technique {
         pass{
+			diffuse 0 0 0
             texture_unit {
                 texture spotlight_image.png
 				colour_op add
@@ -130,6 +132,21 @@ material agua2 {
         pass{
             texture_unit {
                 texture Water02.jpg
+            }
+        }
+    }
+}
+
+material space {
+    technique {
+        pass{
+            ambient 0 0 0
+            texture_unit {
+                texture spaceSky.jpg
+            }
+			texture_unit {
+                texture lightMap.jpg
+				colour_op modulate
             }
         }
     }
