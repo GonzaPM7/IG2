@@ -118,7 +118,7 @@ void IG2App::setupScene()
 	
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 
-	Plano* plano = new Plano(padre);
+	Plano* plano = new Plano(padre, cam);
 	addInputListener(plano);
 
 	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);
@@ -158,7 +158,7 @@ void IG2App::setupScene2()
 
 	// and tell it to render into the main window
 	Viewport* vp = getRenderWindow()->addViewport(cam);
-	vp->setBackgroundColour(Ogre::ColourValue(0.5, 0.5, 1));
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
 	//------------------------------------------------------------------------
 
@@ -192,11 +192,11 @@ void IG2App::setupScene2()
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);*/
 
-	//mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20), "space", 1, 1, true, 1.0, 100, 100);
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20), "space", 1, 1, true, 1.0, 100, 100);
 
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 
-	Plano* plano = new Plano(padre);
+	Plano* plano = new Plano(padre, cam);
 	addInputListener(plano);
 
 	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);

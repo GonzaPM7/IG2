@@ -139,14 +139,44 @@ material agua2 {
 
 material space {
     technique {
-        pass{
-            ambient 0 0 0
+        pass {
             texture_unit {
                 texture spaceSky.jpg
+                rotate_anim 0.01
             }
-			texture_unit {
+            texture_unit {
                 texture lightMap.jpg
-				colour_op modulate
+                scroll_anim 0.1 0.0
+                color_op modulate
+            }
+        }
+    }
+}
+
+material reflejo {
+    technique {
+        pass {
+            texture_unit {
+                texture BeachStones.jpg
+            }
+            texture_unit {
+                texture Water02.jpg
+                scroll_anim -0.1 0.0
+                color_op add
+            }
+        }
+    }
+}
+
+material reflejo2 {
+    technique {
+        pass {
+            texture_unit {
+                texture BeachStones.jpg
+            }
+            texture_unit {
+                texture Water02.jpg
+                color_op add
             }
         }
     }
