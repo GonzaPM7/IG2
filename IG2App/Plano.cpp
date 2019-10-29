@@ -6,40 +6,35 @@ Plano::Plano(Ogre::SceneNode* node,Camera* cam): EntidadIG(node)
 		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 	Ogre::SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	planoEnt = mSM->createEntity("mPlane1080x800");
+	
 	planoEnt->setMaterialName("reflejo");
-	//planoEnt->getSubEntity(0)->getMaterial()->getTechnique(0)->getPass(0)->createTextureUnitState("tusk.jpg");
 	node->attachObject(planoEnt);
-
-	Camera* camRef = mSM->createCamera("RefCam");
-	camRef->setNearClipDistance(1);
-	camRef->setFarClipDistance(10000);
-	camRef->setAutoAspectRatio(true);
 
 	MovablePlane* mpRef = new MovablePlane(Vector3::UNIT_Y, 0);
 	node->attachObject(mpRef);
 
-	camRef->enableReflection(mpRef);
-	camRef->enableCustomNearClipPlane(mpRef);
+	mSM->getCamera("RefCam")->enableReflection(mpRef);
+	mSM->getCamera("RefCam")->enableCustomNearClipPlane(mpRef);
 
 	TexturePtr rttRef = TextureManager::getSingleton().createManual(
 		"rttReflejo", // ejemplo -> (*)
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		TEX_TYPE_2D,
-		cam->getViewport()->getActualWidth(), // ejemplo
-		cam->getViewport()->getActualHeight(), // ejemplo
+		(Real)cam->getViewport()->getActualWidth(), // ejemplo
+		(Real)cam->getViewport()->getActualHeight(), // ejemplo
 		0, PF_R8G8B8, TU_RENDERTARGET);
 
 	RenderTexture* renderTexture = rttRef->getBuffer()->getRenderTarget();
-	Viewport* vpt = renderTexture->addViewport(camRef); // ocupando toda
+	Viewport* vpt = renderTexture->addViewport(mSM->getCamera("RefCam")); // ocupando toda
 	vpt->setClearEveryFrame(true); // la textura
-	vpt->setBackgroundColour(ColourValue::Black);
+	vpt->setBackgroundColour(ColourValue::White);	
 
 	TextureUnitState* tu = planoEnt->getSubEntity(0)->getMaterial()->
 		getTechnique(0)->getPass(0)->
 		createTextureUnitState("rttReflejo");
 
 	tu->setColourOperation(LBO_MODULATE);
-	tu->setProjectiveTexturing(true, camRef);
+	tu->setProjectiveTexturing(true, mSM->getCamera("RefCam"));	
 }
 
 bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)

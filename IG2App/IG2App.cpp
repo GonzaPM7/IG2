@@ -160,6 +160,14 @@ void IG2App::setupScene2()
 	Viewport* vp = getRenderWindow()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
+	//Camara para el reflejo
+	Camera* camRef = mSM->createCamera("RefCam");
+	camRef->setNearClipDistance(1);
+	camRef->setFarClipDistance(10000);
+	camRef->setAutoAspectRatio(true);
+
+	mCamNode->attachObject(camRef);	
+
 	//------------------------------------------------------------------------
 
 	// without light we would just get a black screen 
@@ -196,7 +204,7 @@ void IG2App::setupScene2()
 
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 
-	Plano* plano = new Plano(padre, cam);
+	Plano* plano = new Plano(padre, mSM->getCamera("Cam"));
 	addInputListener(plano);
 
 	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);
@@ -208,9 +216,13 @@ void IG2App::setupScene2()
 	muneco->SetRotation(-130);
 	addInputListener(muneco);
 
+	Sinbad* sinbad = new Sinbad(plano->getNode()->createChildSceneNode());
+	addInputListener(sinbad);
+
 	plano->addListener(plano);
 	noria->addListener(noria);
 	muneco->addListener(muneco);
+	sinbad->addListener(sinbad);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

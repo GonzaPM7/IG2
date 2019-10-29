@@ -127,6 +127,7 @@
     <ClInclude Include="Noria.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="Plano.h" />
+    <ClInclude Include="Sinbad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aspa.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Noria.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="Plano.cpp" />
+    <ClCompile Include="Sinbad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\media\IG2App\Practica1.material" />
