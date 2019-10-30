@@ -207,9 +207,9 @@ void IG2App::setupScene2()
 	Plano* plano = new Plano(padre, mSM->getCamera("Cam"));
 	addInputListener(plano);
 
-	Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);
+	/*Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);
 	//mSM->getRootSceneNode() con esto no gira
-	addInputListener(noria);
+	addInputListener(noria);*/
 
 	Muneco* muneco = new Muneco(plano->getNode()->createChildSceneNode(), false);
 	muneco->SetPosition(400, 100, 600);
@@ -219,10 +219,14 @@ void IG2App::setupScene2()
 	Sinbad* sinbad = new Sinbad(plano->getNode()->createChildSceneNode());
 	addInputListener(sinbad);
 
+	Bomb* bomb = new Bomb(plano->getNode()->createChildSceneNode());
+	addInputListener(bomb);
+
 	plano->addListener(plano);
-	noria->addListener(noria);
+	//noria->addListener(noria);
 	muneco->addListener(muneco);
 	sinbad->addListener(sinbad);
+	bomb->addListener(bomb);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

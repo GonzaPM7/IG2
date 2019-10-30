@@ -12,6 +12,7 @@
 #include "Muñeco.h"
 #include "Plano.h"
 #include "Sinbad.h"
+#include "Bomb.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {

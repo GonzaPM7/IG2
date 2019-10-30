@@ -9,23 +9,16 @@
 #include <OgreSceneNode.h>
 #include "EntidadIG.h"
 
-class Sinbad :public EntidadIG
+class Bomb :
+	public EntidadIG
 {
 private:
-	bool running = false;
-	Ogre::AnimationState* danceState;
-	Ogre::AnimationState* runbaseState;
-	Ogre::AnimationState* runtopState;
-
-	Ogre::AnimationState* movingState;
-
-	Ogre::Entity* ent;
-	Ogre::Entity* sword1;
-	Ogre::Entity* sword2;
-
+	Ogre::AnimationState* animationState;
+	bool animActive = true;
 public:
-	Sinbad(Ogre::SceneNode* node);
+	Bomb(Ogre::SceneNode* node);
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
+
 };
 
