@@ -11,7 +11,7 @@ Sinbad::Sinbad(Ogre::SceneNode* node): EntidadIG(node)
 	sinbadNode->setPosition(800, 250, -800);
 
 	sword1 = mSM->createEntity("Sword.mesh");
-	ent->attachObjectToBone("Handle.R", sword1);
+	ent->attachObjectToBone("Sheath.R", sword1);
 	
 	sword2 = mSM->createEntity("Sword.mesh");
 	ent->attachObjectToBone("Sheath.L", sword2);
@@ -38,12 +38,16 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 			danceState->setEnabled(true);
 			runbaseState->setEnabled(false);
 			runtopState->setEnabled(false);
+			ent->detachObjectFromBone(sword1);
+			ent->attachObjectToBone("Sheath.R", sword1);
 		}
 		else
 		{
 			danceState->setEnabled(false);
 			runbaseState->setEnabled(true);
-			runtopState->setEnabled(true);
+			runtopState->setEnabled(true);	
+			ent->detachObjectFromBone(sword1);
+			ent->attachObjectToBone("Handle.R", sword1);
 		}
 		running = !running;
 	}
