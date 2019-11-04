@@ -27,7 +27,7 @@ Sinbad::Sinbad(Ogre::SceneNode* node): EntidadIG(node)
 	runbaseState->setLoop(true);
 	runtopState->setLoop(true);
 
-	int duracion = 10;
+	int duracion = 15;
 	int longDesplazamientoX = 1650;
 	int longDesplazamientoZ = 1600;
 
@@ -35,42 +35,55 @@ Sinbad::Sinbad(Ogre::SceneNode* node): EntidadIG(node)
 	Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
 	track->setAssociatedNode(mNode);
 
-	Ogre::Real durPasoX = duracion * 0.25;  // uniformes
-	Ogre::Real durPasoZ = duracion * 0.15;  // uniformes
-	Ogre::Real durGiro= duracion * 0.05;  // uniformes
+	Ogre::Real durPaso = duracion / 5.0;
 	Ogre::Vector3  keyframePos(0.0);
 	Ogre::Vector3 src(0, 0, 1); // posición y orientación iniciales
 	Ogre::TransformKeyFrame* kf;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
+	
+	kf = track->createNodeKeyFrame(durPaso * 0);
+	kf->setTranslate(keyframePos);// Keyframe 0: esquina arriba derecha
 
-	kf = track->createNodeKeyFrame(durPasoX * 0);  // Keyframe 0: esquina arriba derecha
-
-	kf = track->createNodeKeyFrame(durPasoZ * 1);   // Keyframe 1: esquina abajo derecha
+	kf = track->createNodeKeyFrame(durPaso * 1);   // Keyframe 1: esquina abajo derecha
 	keyframePos += Ogre::Vector3::UNIT_Z * longDesplazamientoZ;
 	kf->setTranslate(keyframePos); // Abajo
 
-	kf = track->createNodeKeyFrame(durGiro * 2); // giro
+	kf = track->createNodeKeyFrame(durPaso * 1.25); // giro
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * 100;
+	keyframePos += Ogre::Vector3::UNIT_Z * 100;
+	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 0))); // Yaw(45)
 
-	kf = track->createNodeKeyFrame(durPasoX * 3); // Keyframe 2: esquina abajo izquierda
+	kf = track->createNodeKeyFrame(durPaso * 2.25); // Keyframe 2: esquina abajo izquierda
 	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * longDesplazamientoX;
 	kf->setTranslate(keyframePos);  // Arriba
+	kf->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 0)));
 
-	kf = track->createNodeKeyFrame(durGiro * 4); // giro
+	kf = track->createNodeKeyFrame(durPaso * 2.5); // giro
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * 100;
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * 100;
+	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, -1))); // Yaw(45)
 
-	kf = track->createNodeKeyFrame(durPasoZ * 5); // Keyframe 3: esquina arriba izquierda
+	kf = track->createNodeKeyFrame(durPaso * 3.5); // Keyframe 3: esquina arriba izquierda
 	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * longDesplazamientoZ;
 	kf->setTranslate(keyframePos);  // Arriba
+	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, -1)));
 
-	kf = track->createNodeKeyFrame(durGiro * 6); // giro
+	kf = track->createNodeKeyFrame(durPaso * 3.75); // giro
+	keyframePos += Ogre::Vector3::UNIT_X * 100;
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * 100;
+	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, 0))); // Yaw(45)
 
-	kf = track->createNodeKeyFrame(durPasoX * 7);  // Keyframe 4: origen
+	kf = track->createNodeKeyFrame(durPaso * 4.75);  // Keyframe 4: origen
 	keyframePos += Ogre::Vector3::UNIT_X * longDesplazamientoX;
 	kf->setTranslate(keyframePos);  // Arriba
+	kf->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, 0)));
 
-	kf = track->createNodeKeyFrame(durGiro * 8); // giro
-	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1))); // Yaw(45)
+	kf = track->createNodeKeyFrame(durPaso * 5); // giro
+	keyframePos += Ogre::Vector3::UNIT_X * 100;
+	keyframePos += Ogre::Vector3::UNIT_Z * 100;
+	kf->setTranslate(keyframePos);
 
 	movingState = mSM->createAnimationState("animSS");
 	movingState->setLoop(true);
