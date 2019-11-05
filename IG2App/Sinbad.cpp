@@ -87,8 +87,6 @@ Sinbad::Sinbad(Ogre::SceneNode* node): EntidadIG(node)
 
 	movingState = mSM->createAnimationState("animSS");
 	movingState->setLoop(true);
-	movingState->setEnabled(true);
-	
 }
 
 bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -102,6 +100,7 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 			runtopState->setEnabled(false);
 			ent->detachObjectFromBone(sword1);
 			ent->attachObjectToBone("Sheath.R", sword1);
+			movingState->setEnabled(false);
 		}
 		else
 		{
@@ -110,6 +109,7 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 			runtopState->setEnabled(true);	
 			ent->detachObjectFromBone(sword1);
 			ent->attachObjectToBone("Handle.R", sword1);
+			movingState->setEnabled(true);
 		}
 		running = !running;
 	}
@@ -117,9 +117,47 @@ bool Sinbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 }
 
 void Sinbad::frameRendered(const Ogre::FrameEvent& evt)
-{
-	danceState->addTime(evt.timeSinceLastFrame);
-	runbaseState->addTime(evt.timeSinceLastFrame);
-	runtopState->addTime(evt.timeSinceLastFrame);
-	movingState->addTime(evt.timeSinceLastFrame);
+{	
+	if (running) {
+		movingState->addTime(evt.timeSinceLastFrame);
+		runbaseState->addTime(evt.timeSinceLastFrame);
+		runtopState->addTime(evt.timeSinceLastFrame);
+	}
+	else
+		danceState->addTime(evt.timeSinceLastFrame);
+	if(dead)
+		bombState->addTime(evt.timeSinceLastFrame);
 }
+
+void Sinbad::receiveEvent(EntidadIG* entidad)
+{
+	running = false;
+	dead = true;
+
+	int duracion = 16;
+
+	Ogre::Animation* animation = mSM->createAnimation("animBomb", duracion);
+	Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
+	track->setAssociatedNode(mNode);
+
+	Ogre::Real durPaso = duracion / 2.0;
+	Ogre::Vector3  keyframePos(0.0);
+	Ogre::Vector3 src(mNode->getPosition()); // posición y orientación iniciales
+	Ogre::TransformKeyFrame* kf;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
+
+	kf = track->createNodeKeyFrame(durPaso * 0);   // Keyframe 1: esquina abajo derecha
+	kf->setTranslate(mNode->getPosition()); // Abajo
+
+	kf= track->createNodeKeyFrame(durPaso * 2);
+	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 0)));
+	//kf->setTranslate(mNode->getPosition());
+
+	/*kf = track->createNodeKeyFrame(durPaso * 2);
+	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 0)));
+	kf->setTranslate(Ogre::Vector3(0,0,0));*/
+
+	bombState = mSM->createAnimationState("animBomb");
+	bombState->setLoop(true);
+	bombState->setEnabled(true);
+}
+

@@ -48,8 +48,7 @@ bool Bomb::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_b)
 	{
-		animActive = !animActive;
-		animationState->setEnabled(animActive);
+		sendEvent(this);
 	}
 	return true;
 }
@@ -57,4 +56,10 @@ bool Bomb::keyPressed(const OgreBites::KeyboardEvent& evt)
 void Bomb::frameRendered(const Ogre::FrameEvent& evt)
 {
 	animationState->addTime(evt.timeSinceLastFrame);
+}
+
+void Bomb::receiveEvent(EntidadIG* entidad)
+{
+	animActive = !animActive;
+	animationState->setEnabled(animActive);
 }
