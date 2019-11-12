@@ -42,6 +42,10 @@ Bomb::Bomb(Ogre::SceneNode* node): EntidadIG(node)
 	animationState = mSM->createAnimationState("animVV");
 	animationState->setLoop(true);
 	animationState->setEnabled(true);
+
+	ps = mSM->createParticleSystem("parSys", "Smoke");
+	mNode->attachObject(ps);
+	ps->setEmitting(false);
 }
 
 bool Bomb::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -62,4 +66,5 @@ void Bomb::receiveEvent(EntidadIG* entidad)
 {
 	animActive = !animActive;
 	animationState->setEnabled(animActive);
+	ps->setEmitting(true);
 }

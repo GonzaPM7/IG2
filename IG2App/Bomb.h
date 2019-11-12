@@ -8,6 +8,7 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include "EntidadIG.h"
+#include <OgreParticleSystem.h>
 
 class Bomb :
 	public EntidadIG
@@ -15,6 +16,7 @@ class Bomb :
 private:
 	Ogre::AnimationState* animationState;
 	bool animActive = true;
+	Ogre::ParticleSystem* ps;
 public:
 	Bomb(Ogre::SceneNode* node);
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);

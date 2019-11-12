@@ -1,12 +1,12 @@
 particle_system Smoke
-{  // p. s. attributes
-		renderer billboard
-		billboard_type point
-		// billboard_rotation_type texcoord
-		material Smoke
-		particle_width 35
-		particle_height 35
-		quota 500
+{
+	renderer billboard
+	billboard_type point
+	// billboard_rotation_type texcoord
+	material Smoke
+	particle_width 35
+	particle_height 35
+	quota 500
 	
 	emitter Point
 	{ // e. attributes
