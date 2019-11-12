@@ -52,7 +52,7 @@ bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 void Plano::receiveEvent(EntidadIG* entidad)
 {	
-	if (moving)
+	/*if (moving)
 	{
 		planoEnt->setMaterialName("reflejo2");
 	}
@@ -60,5 +60,5 @@ void Plano::receiveEvent(EntidadIG* entidad)
 	{
 		planoEnt->setMaterialName("reflejo");
 	}
-	moving = !moving;
+	moving = !moving;*/
 }

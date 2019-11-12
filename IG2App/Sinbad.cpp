@@ -48,31 +48,31 @@ Sinbad::Sinbad(Ogre::SceneNode* node): EntidadIG(node)
 	keyframePos += Ogre::Vector3::UNIT_Z * longDesplazamientoZ;
 	kf->setTranslate(keyframePos); // Abajo
 
-	kf = track->createNodeKeyFrame(durPaso * 1.25); // giro
-	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * 100;
-	keyframePos += Ogre::Vector3::UNIT_Z * 100;
+	kf = track->createNodeKeyFrame(durPaso * 1.15); // giro
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * 50;
+	keyframePos += Ogre::Vector3::UNIT_Z * 50;
 	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 0))); // Yaw(45)
 
-	kf = track->createNodeKeyFrame(durPaso * 2.25); // Keyframe 2: esquina abajo izquierda
+	kf = track->createNodeKeyFrame(durPaso * 2.35); // Keyframe 2: abajo
 	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * longDesplazamientoX;
 	kf->setTranslate(keyframePos);  // Arriba
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 0)));
 
-	kf = track->createNodeKeyFrame(durPaso * 2.5); // giro
-	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * 100;
-	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * 100;
+	kf = track->createNodeKeyFrame(durPaso * 2.50); // giro
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * 50;
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * 50;
 	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, -1))); // Yaw(45)
 
-	kf = track->createNodeKeyFrame(durPaso * 3.5); // Keyframe 3: esquina arriba izquierda
+	kf = track->createNodeKeyFrame(durPaso * 3.50); // Keyframe 3: esquina arriba izquierda
 	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * longDesplazamientoZ;
 	kf->setTranslate(keyframePos);  // Arriba
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, -1)));
 
 	kf = track->createNodeKeyFrame(durPaso * 3.75); // giro
-	keyframePos += Ogre::Vector3::UNIT_X * 100;
-	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * 100;
+	keyframePos += Ogre::Vector3::UNIT_X * 50;
+	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Z * 50;
 	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, 0))); // Yaw(45)
 
@@ -82,8 +82,8 @@ Sinbad::Sinbad(Ogre::SceneNode* node): EntidadIG(node)
 	kf->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, 0)));
 
 	kf = track->createNodeKeyFrame(durPaso * 5); // giro
-	keyframePos += Ogre::Vector3::UNIT_X * 100;
-	keyframePos += Ogre::Vector3::UNIT_Z * 100;
+	keyframePos += Ogre::Vector3::UNIT_X * 50;
+	keyframePos += Ogre::Vector3::UNIT_Z * 50;
 	kf->setTranslate(keyframePos);
 
 	movingState = mSM->createAnimationState("animSS");
@@ -143,56 +143,56 @@ void Sinbad::frameRendered(const Ogre::FrameEvent& evt)
 
 void Sinbad::receiveEvent(EntidadIG* entidad)
 {
-	danceState->setEnabled(false);
-	runbaseState->setEnabled(true);
-	runtopState->setEnabled(true);
-	movingState->setEnabled(false);
+	if (!dead) {
+		danceState->setEnabled(false);
+		runbaseState->setEnabled(true);
+		runtopState->setEnabled(true);
+		movingState->setEnabled(false);
 
-	dead = true;
+		dead = true;
 
-	int duracion = 6;
-	//mNode->setPosition(0, 0, 0);
-	mNode->setInitialState();
+		int duracion = 6;
+		mNode->setInitialState();
 
-	Ogre::Animation* animation = mSM->createAnimation("animBomb", duracion);
-	Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
-	track->setAssociatedNode(mNode);
+		Ogre::Animation* animation = mSM->createAnimation("animBomb", duracion);
+		Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
+		track->setAssociatedNode(mNode);
 
-	Ogre::Real durPaso = duracion / 3;
-	Ogre::Vector3 keyFramePos = mNode->getPosition();
-	Ogre::Vector3 src(mNode->_getDerivedOrientation() * Ogre::Vector3::UNIT_Z); // posición y orientación iniciales
-	Ogre::Vector3 direccion = Ogre::Vector3(0., 250., 0.) - keyFramePos;
+		Ogre::Real durPaso = duracion / 3;
+		Ogre::Vector3 keyFramePos = mNode->getPosition();
+		Ogre::Vector3 src(mNode->_getDerivedOrientation() * Ogre::Vector3::UNIT_Z); // posición y orientación iniciales
+		Ogre::Vector3 direccion = Ogre::Vector3(0, 250, 0) - keyFramePos;
 
-	Ogre::TransformKeyFrame* kf;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
+		Ogre::TransformKeyFrame* kf;
 
-	kf = track->createNodeKeyFrame(durPaso * 0);
-	//kf->setTranslate(keyFramePos - Ogre::Vector3(800, 250, -800));
-	kf->setRotation(src.getRotationTo(direccion));
+		kf = track->createNodeKeyFrame(durPaso * 0);
+		kf->setRotation(src.getRotationTo(direccion));
 
-	kf= track->createNodeKeyFrame(durPaso * 1);
-	keyFramePos = Ogre::Vector3(0., 250., 0.) - keyFramePos;
-	kf->setTranslate(keyFramePos);
-	kf->setRotation(src.getRotationTo(direccion));
+		kf = track->createNodeKeyFrame(durPaso * 1);
+		keyFramePos = Ogre::Vector3(0, 250, 0) - keyFramePos;
+		kf->setTranslate(keyFramePos);
+		kf->setRotation(src.getRotationTo(direccion));
 
-	kf = track->createNodeKeyFrame(durPaso * 1.15);
-	keyFramePos += Ogre::Vector3(0., 300., 0.);
-	kf->setTranslate(keyFramePos);
-	kf->setRotation(src.getRotationTo(direccion));
+		kf = track->createNodeKeyFrame(durPaso * 1.15);
+		keyFramePos += Ogre::Vector3(0, 400, 0);
+		kf->setTranslate(keyFramePos);
+		kf->setRotation(src.getRotationTo(direccion));
 
-	kf = track->createNodeKeyFrame(durPaso * 1.30);	
-	keyFramePos -= Ogre::Vector3(0., 550., 0.);
-	kf->setTranslate(keyFramePos);
-	kf->setRotation(src.getRotationTo(direccion));
-	kf->setRotation(src.getRotationTo(Ogre::Vector3(0., 1000., 0.)));
+		src = Ogre::Vector3(0, 1, 0);
 
-	kf = track->createNodeKeyFrame(durPaso * 3);	
-	keyFramePos += Ogre::Vector3(1000., 0., 0.);
-	kf->setTranslate(keyFramePos);
-	kf->setRotation(src.getRotationTo(direccion));
-	kf->setRotation(src.getRotationTo(Ogre::Vector3(0., 1000., 0.)));
-	
-	bombState = mSM->createAnimationState("animBomb");
-	bombState->setLoop(false);
-	bombState->setEnabled(true);
+		kf = track->createNodeKeyFrame(durPaso * 1.30);
+		keyFramePos -= Ogre::Vector3(0, 650, 0);
+		kf->setTranslate(keyFramePos);
+		kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, -1)));
+
+		kf = track->createNodeKeyFrame(durPaso * 3);
+		keyFramePos += Ogre::Vector3(1100, 0, 0);
+		kf->setTranslate(keyFramePos);
+		kf->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, -1)));
+
+		bombState = mSM->createAnimationState("animBomb");
+		bombState->setLoop(false);
+		bombState->setEnabled(true);
+	}
 }
 

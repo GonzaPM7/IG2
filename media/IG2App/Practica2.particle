@@ -13,7 +13,7 @@ particle_system Smoke
 		direction 0 1 0
 		angle 35   
 		emission_rate   15
-		time_to_live    4
+		time_to_live    10
 		velocity_min    50
 		velocity_max    80
 	}
