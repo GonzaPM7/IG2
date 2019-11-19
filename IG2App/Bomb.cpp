@@ -7,7 +7,7 @@ Bomb::Bomb(Ogre::SceneNode* node): EntidadIG(node)
 {
 	Ogre::SceneNode* bombNode = mNode->createChildSceneNode("bomb");
 	Ogre::Entity* ent = mSM->createEntity("uv_sphere.mesh");
-	ent->setMaterialName("bomb");
+	ent->setMaterialName("bombGLSL");
 	bombNode->attachObject(ent);
 	bombNode->setPosition(0, 0, 0);
 	bombNode->setScale(0.25, 0.25, 0.25);

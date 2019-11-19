@@ -200,7 +200,7 @@ void IG2App::setupScene2()
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);*/
 
-	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -200), "spaceGLSL", 1, 1, true, 1.0, 100, 100);
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "spaceGLSL", 1, 1, true, 1.0, 100, 100);
 
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 

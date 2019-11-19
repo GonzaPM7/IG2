@@ -212,11 +212,12 @@ material Smoke
 }
 
 vertex_program Ejercicio1VS glsl //nombre para el shader
-	{
+{
 	source Ejercicio1VS.glsl // archivo del código
 	default_params // valores para las variable uniform
 	{
 		param_named_auto modelViewProjMat worldviewproj_matrix
+		param_named_auto offset time
 	}
 }	
 
@@ -228,20 +229,24 @@ fragment_program Ejercicio1FS glsl //nombre para el shader
 		param_named textura0 int 0 // 1º unidad de textura ‐> *
 		param_named textura1 int 1 // 2º unidad de textura ‐> *
 		param_named FB float 0.5
-		param_named intLuzAmb float 1.0
+		param_named intLuzAmb float 1
 	}
 }	
 
 
 material spaceGLSL {
-	technique {
-		pass {
+	technique 
+	{
+		pass 
+		{
 			vertex_program_ref Ejercicio1VS
 			{ // params ‐> default_params
+			
 			}
 
 			fragment_program_ref Ejercicio1FS
 			{ // params ‐> default_params
+			
 			}
 			texture_unit texture0 { // * ‐> int 0
 				texture lightMap.jpg 2d // archivo
@@ -254,4 +259,14 @@ material spaceGLSL {
 			} // de acceso al texel
 		}
 	}
+}
+
+material bombGLSL {
+    technique {
+        pass{
+            texture_unit {
+                texture corrosion.jpg
+            }
+        }
+    }
 }
