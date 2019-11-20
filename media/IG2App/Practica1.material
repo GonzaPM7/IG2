@@ -267,6 +267,10 @@ vertex_program Ejercicio2VS glsl
     default_params
     {
         param_named_auto modelViewProjMat worldviewproj_matrix
+		param_named_auto modelViewProjMat inverse_transpose_world_matrix
+		param_named light_position float4 0
+		param_named light_diffuse_colour float4 0
+		
     }
 }
 
