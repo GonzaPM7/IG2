@@ -278,33 +278,32 @@ fragment_program Ejercicio2FS glsl
         param_named textura0 int 0 
         param_named textura1 int 1 
         param_named FB float 0.5
-        param_named InColor float4 0.5 0.5 0.5 0.5
-        param_named OutColor float4 0.58 0.5 0.17 0.2
+        param_named InColor float4 0.5 0.5 0.5 1.0
+        param_named OutColor float4 0.3 0.7 0.3 0.2
+		param_named intLuzAmb float 1.0
     }
 }
 
 material bombGLSL {
     technique {
-        pass {
-            texture_unit {
-				cull_hardware none
-				cull_software none 
+        pass {       
+			cull_hardware none
+			cull_software none
+		
+			vertex_program_ref Ejercicio2VS
+			{ // params ‐> default_params
 
-				vertex_program_ref Ejercicio2VS
-				{ // params ‐> default_params
-
-				}
-				fragment_program_ref Ejercicio2FS
-				{ // params ‐> default_params
-
-				}
-				texture_unit texture0 {
-					texture BumpyMetal.jpg
-				}
-				texture_unit texture1 {
-					texture corrosion.jpg
-				}
 			}
+			fragment_program_ref Ejercicio2FS
+			{ // params ‐> default_params
+
+			}
+			texture_unit texture0 {
+				texture BumpyMetal.jpg 2d
+			}
+			texture_unit texture1 {
+				texture corrosion.jpg 2d
+			}			
 		}
 	}	
 }
