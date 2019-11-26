@@ -12,7 +12,7 @@ void main() {
 
 	vec3 color0 = vec3(texture(textura0, vUv0)); // acceso a texel
 	vec3 color1 = vec3(texture(textura1, vUv0)); // configuración
-	vec3 color = mix(color0, color1, FB) * intLuzAmb;
+	vec3 color = color0 * color1 * FB * intLuzAmb;
 	if(gl_FrontFacing){
         fFragColor = OutColor * vec4(color, 1.0) * FB;
     }else{

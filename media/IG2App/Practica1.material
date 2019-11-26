@@ -266,11 +266,7 @@ vertex_program Ejercicio2VS glsl
     source Ejercicio2VS.glsl
     default_params
     {
-        param_named_auto modelViewProjMat worldviewproj_matrix
-		param_named_auto modelViewProjMat inverse_transpose_world_matrix
-		param_named light_position float4 0
-		param_named light_diffuse_colour float4 0
-		
+        param_named_auto modelViewProjMat worldviewproj_matrix	
     }
 }
 
@@ -288,17 +284,43 @@ fragment_program Ejercicio2FS glsl
     }
 }
 
+vertex_program Ejercicio2bVS glsl
+{
+    source Ejercicio2bVS.glsl
+    default_params
+    {
+        param_named_auto modelViewProjMat worldviewproj_matrix
+    }
+}
+
+fragment_program Ejercicio2bFS glsl 
+{
+    source Ejercicio2bFS.glsl
+    default_params
+    {
+        param_named textura0 int 0 
+        param_named textura1 int 1 
+        param_named FB float 0.5
+        param_named InColor float4 0.5 0.5 0.5 1.0
+        param_named OutColor float4 0.3 0.7 0.3 0.2
+		param_named intLuzAmb float 1.0
+        param_named lightPosition float3 0.5 0.5 0.5
+        param_named lightDiffuse float3 0.5 0.5 0.5
+        param_named materialDiffuse float3 0.5 0.5 0.5
+    }
+}
+
 material bombGLSL {
     technique {
         pass {       
 			cull_hardware none
 			cull_software none
 		
-			vertex_program_ref Ejercicio2VS
+			vertex_program_ref Ejercicio2bVS
 			{ // params ‐> default_params
 
 			}
-			fragment_program_ref Ejercicio2FS
+			fragment_program_ref Ejercicio2bFS
 			{ // params ‐> default_params
 
 			}
