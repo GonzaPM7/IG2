@@ -147,7 +147,7 @@ material space {
             texture_unit {
                 texture lightMap.jpg
                 scroll_anim 0.1 0.0
-                color_op modulate
+                colour_op modulate
             }
         }
     }
@@ -162,7 +162,7 @@ material reflejo {
             texture_unit {
                 texture Water02.jpg
                 scroll_anim -0.1 0.0
-                color_op add
+                colour_op add
             }
         }
     }
@@ -176,7 +176,7 @@ material reflejo2 {
             }
             texture_unit {
                 texture Water02.jpg
-                color_op add
+                colour_op add
             }
         }
     }
@@ -289,7 +289,10 @@ vertex_program Ejercicio2bVS glsl
     source Ejercicio2bVS.glsl
     default_params
     {
-        param_named_auto modelViewProjMat worldviewproj_matrix
+        param_named_auto model world_matrix
+		param_named_auto projection projection_matrix
+		param_named_auto normalMat inverse_transpose_world_matrix
+		param_named_auto view view_matrix
     }
 }
 
@@ -300,13 +303,12 @@ fragment_program Ejercicio2bFS glsl
     {
         param_named textura0 int 0 
         param_named textura1 int 1 
-        param_named FB float 0.5
-        param_named InColor float4 0.5 0.5 0.5 1.0
+        param_named InColor float4 0.8 0.8 0.3 1.0
         param_named OutColor float4 0.3 0.7 0.3 0.2
-		param_named intLuzAmb float 1.0
-        param_named lightPosition float3 0.5 0.5 0.5
-        param_named lightDiffuse float3 0.5 0.5 0.5
-        param_named materialDiffuse float3 0.5 0.5 0.5
+		param_named_auto viewPos camera_position
+        param_named_auto lightPosition light_position 0
+        param_named_auto lightDiffuse light_diffuse_colour 0
+        param_named_auto materialDiffuse surface_diffuse_colour
     }
 }
 
@@ -316,11 +318,11 @@ material bombGLSL {
 			cull_hardware none
 			cull_software none
 		
-			vertex_program_ref Ejercicio2VS
+			vertex_program_ref Ejercicio2bVS
 			{ // params ‐> default_params
 
 			}
-			fragment_program_ref Ejercicio2FS
+			fragment_program_ref Ejercicio2bFS
 			{ // params ‐> default_params
 
 			}
