@@ -368,3 +368,28 @@ material LuminancePS {
         }
     }
 }
+
+fragment_program riskPS glsl {
+    source riskPS.glsl
+    default_params {
+        param_named RTT0 int 0
+    }
+}
+
+material riskPS {
+    technique {
+        pass {
+            depth_check off
+            depth_write off
+            vertex_program_ref LuminanceVS {
+
+            }
+            fragment_program_ref riskPS {
+
+            }
+            texture_unit RTT0 {
+                texture riesgoBiologico.png 2d
+            }
+        }
+    }
+}

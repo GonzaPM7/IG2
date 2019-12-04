@@ -163,6 +163,8 @@ void IG2App::setupScene2()
 
 	CompositorManager::getSingleton().addCompositor(vp, "Luminance");
 	CompositorManager::getSingleton().setCompositorEnabled(vp, "Luminance", true);
+	CompositorManager::getSingleton().addCompositor(vp, "risk");
+	CompositorManager::getSingleton().setCompositorEnabled(vp, "risk", true);
 
 	//Camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");
