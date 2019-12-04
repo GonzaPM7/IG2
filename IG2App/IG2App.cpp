@@ -4,6 +4,7 @@
 #include <OgreInput.h>
 #include <SDL_keycode.h>
 #include <OgreMeshManager.h>
+#include <OgreCompositorManager.h>
 
 using namespace Ogre;
 
@@ -159,6 +160,9 @@ void IG2App::setupScene2()
 	// and tell it to render into the main window
 	Viewport* vp = getRenderWindow()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+
+	CompositorManager::getSingleton().addCompositor(vp, "Luminance");
+	CompositorManager::getSingleton().setCompositorEnabled(vp, "Luminance", true);
 
 	//Camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");

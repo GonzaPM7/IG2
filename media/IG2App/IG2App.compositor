@@ -1,0 +1,18 @@
+compositor Luminance {
+    technique {
+        // Temporary Textures for use in subsequent target passes
+        // Dimensions based on the physical dimensions of the viewport
+        // to which the compositor is attached
+        texture RTT0 target_width target_height PF_R8G8B8A8
+        target RTT0 { 
+            input previous 
+        } // from original scene or from previous compositor in the chain
+        target_output { 
+            input none 
+            pass render_quad { 
+                material LuminancePS 
+                input 0 RTT0 
+            } // para usar la textura en el fragment shader del material
+        }
+    }
+}
