@@ -373,6 +373,7 @@ fragment_program riskPS glsl {
     source riskPS.glsl
     default_params {
         param_named RTT0 int 0
+		param_named riesgoBiologico int 1
     }
 }
 
@@ -388,8 +389,53 @@ material riskPS {
 
             }
             texture_unit RTT0 {
-                texture riesgoBiologico.png 2d
+                filtering none
             }
+			texture_unit riesgoBiologico {
+				texture riesgoBiologico.png
+			}
         }
     }
+}
+
+vertex_program MandelbrotVS glsl
+{
+	source MandelbrotVS.glsl // archivo del vertex shader
+			
+	default_params // valores para las variables uniform
+	{
+		param_named_auto modelViewProjMat worldviewproj_matrix
+		param_named_auto offset time
+	}
+}
+
+fragment_program MandelbrotFS glsl
+{
+	source MandelbrotFS.glsl // archivo del fragment shader
+	default_params // valores para las variables uniform
+	{
+		param_named InColor float4 0.5 0.5 1.0 1.0
+		param_named OutColor1 float4 0.5 0.25 1.0 1.0
+		param_named OutColor2 float4 1.0 0.5 0.25 1.0
+		param_named skyspace int 0
+	}
+}
+
+material Mandelbrot
+{
+	technique
+	{
+		pass
+		{
+			vertex_program_ref MandelbrotVS
+			{ // params ‐> default_params
+			}
+			fragment_program_ref MandelbrotFS
+			{ // params ‐> default_params
+			}
+			texture_unit skyspace {
+				texture spaceSky.jpg 2d
+            }
+		}
+	} 
 }

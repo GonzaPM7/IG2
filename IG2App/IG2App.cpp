@@ -14,6 +14,10 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
     getRoot()->queueEndRendering();
   }
+  else if (evt.keysym.sym == SDLK_i) {
+	  interference = !interference;
+	  CompositorManager::getSingleton().setCompositorEnabled(vp, "risk", interference);
+  }
   /*else if (evt.keysym.sym == SDLK_w)
   {
 	  //turnClock();
@@ -158,13 +162,11 @@ void IG2App::setupScene2()
 	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
 
 	// and tell it to render into the main window
-	Viewport* vp = getRenderWindow()->addViewport(cam);
+	vp = getRenderWindow()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-	CompositorManager::getSingleton().addCompositor(vp, "Luminance");
-	CompositorManager::getSingleton().setCompositorEnabled(vp, "Luminance", true);
 	CompositorManager::getSingleton().addCompositor(vp, "risk");
-	CompositorManager::getSingleton().setCompositorEnabled(vp, "risk", true);
+	CompositorManager::getSingleton().setCompositorEnabled(vp, "risk", interference);
 
 	//Camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");
@@ -206,7 +208,7 @@ void IG2App::setupScene2()
 	Entity* e = mSM->createEntity("mPlane1080x800");
 	PlanoNode->attachObject(e);*/
 
-	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "spaceGLSL", 1, 1, true, 1.0, 100, 100);
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "Mandelbrot", 1, 1, true, 1.0, 100, 100);
 
 	padre = mSM->getRootSceneNode()->createChildSceneNode();
 

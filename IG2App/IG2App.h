@@ -55,6 +55,8 @@ protected:
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  
+  Ogre::Viewport* vp;
+  bool interference = false;
 };
 
 #endif
