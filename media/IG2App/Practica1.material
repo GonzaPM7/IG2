@@ -369,15 +369,15 @@ material LuminancePS {
     }
 }
 
-fragment_program riskPS glsl {
-    source riskPS.glsl
+fragment_program InterferencePS glsl {
+    source InterferencePS.glsl
     default_params {
         param_named RTT0 int 0
 		param_named riesgoBiologico int 1
     }
 }
 
-material riskPS {
+material InterferencePS {
     technique {
         pass {
             depth_check off
@@ -385,7 +385,7 @@ material riskPS {
             vertex_program_ref LuminanceVS {
 
             }
-            fragment_program_ref riskPS {
+            fragment_program_ref InterferencePS {
 
             }
             texture_unit RTT0 {

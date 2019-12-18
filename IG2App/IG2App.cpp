@@ -16,20 +16,8 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   }
   else if (evt.keysym.sym == SDLK_i) {
 	  interference = !interference;
-	  CompositorManager::getSingleton().setCompositorEnabled(vp, "risk", interference);
+	  CompositorManager::getSingleton().setCompositorEnabled(vp, "Interference", interference);
   }
-  /*else if (evt.keysym.sym == SDLK_w)
-  {
-	  //turnClock();
-  }
-  else if (evt.keysym.sym == SDLK_q)
-  {
-	  //moveMuneco(true);
-  }
-  else if (evt.keysym.sym == SDLK_e)
-  {
-	  //moveMuneco(false);
-  }*/
   
   return true;
 }
@@ -165,8 +153,8 @@ void IG2App::setupScene2()
 	vp = getRenderWindow()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-	CompositorManager::getSingleton().addCompositor(vp, "risk");
-	CompositorManager::getSingleton().setCompositorEnabled(vp, "risk", interference);
+	CompositorManager::getSingleton().addCompositor(vp, "Interference");
+	CompositorManager::getSingleton().setCompositorEnabled(vp, "Interference", interference);
 
 	//Camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");
@@ -193,20 +181,6 @@ void IG2App::setupScene2()
 
 	//------------------------------------------------------------------------
 
-	// finally something to render
-
-	//Original 
-	/*Ogre::Entity* ent = mSM->createEntity("cube.mesh");
-	mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
-	mSinbadNode->setPosition(0, 200, 0);
-	mSinbadNode->attachObject(ent);*/
-
-	//Aspa aspa = Aspa(mSM->getRootSceneNode());
-	/*MeshManager::getSingleton().createPlane("mPlane1080x800",ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		Plane(Vector3::UNIT_Y, 0), 2080, 1800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
-	SceneNode* PlanoNode = mSM->getRootSceneNode()->createChildSceneNode();
-	Entity* e = mSM->createEntity("mPlane1080x800");
-	PlanoNode->attachObject(e);*/
 
 	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "Mandelbrot", 1, 1, true, 1.0, 100, 100);
 
@@ -215,9 +189,6 @@ void IG2App::setupScene2()
 	Plano* plano = new Plano(padre, mSM->getCamera("Cam"));
 	addInputListener(plano);
 
-	/*Noria* noria = new Noria(plano->getNode()->createChildSceneNode(), 20);
-	//mSM->getRootSceneNode() con esto no gira
-	addInputListener(noria);*/
 
 	Muneco* muneco = new Muneco(plano->getNode()->createChildSceneNode(), false);
 	muneco->SetPosition(400, 100, 600);
@@ -240,8 +211,6 @@ void IG2App::setupScene2()
 	addInputListener(mCamMgr);
 	mCamMgr->setStyle(OgreBites::CS_ORBIT);
 
-	//mCamMgr->setTarget(mSinbadNode);  
-	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 
 	//------------------------------------------------------------------------
 

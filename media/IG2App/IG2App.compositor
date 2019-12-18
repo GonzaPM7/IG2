@@ -17,7 +17,7 @@ compositor Luminance {
     }
 }
 
-compositor risk {
+compositor Interference {
     technique {
         // Temporary Textures for use in subsequent target passes
         // Dimensions based on the physical dimensions of the viewport
@@ -29,7 +29,7 @@ compositor risk {
         target_output { 
             input none 
             pass render_quad { 
-                material riskPS 
+                material InterferencePS 
                 input 0 RTT0 
             } // para usar la textura en el fragment shader del material
         }

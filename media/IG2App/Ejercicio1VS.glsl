@@ -10,5 +10,5 @@ void main() {
 	vUv0 = uv0;
 	vUv1 = uv0;
 	vUv1.s = vUv0.s - offset/15;
-	gl_Position = modelViewProjMat * vertex; // obligatorio
+	gl_Position = modelViewProjMat * vertex;
 }
